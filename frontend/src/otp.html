@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verifikasi Nomor - KASEP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body
+    class="bg-cyan-900 flex items-center justify-center min-h-screen font-sans"
+  >
+    <!-- Card -->
+    <div class="bg-white rounded-xl shadow-xl w-full max-w-md p-8 text-center">
+      <!-- Icon -->
+      <img
+        src="./assets/image/email-verify.png"
+        alt="Verifikasi Nomor"
+        class="mx-auto w-28 mb-4"
+      />
+
+      <!-- Heading -->
+      <h2 class="text-lg font-bold mb-1">Verifikasi Nomor Anda</h2>
+      <p class="text-sm text-gray-600 mb-6">
+        Kode verifikasi telah dikirim ke nomor <br />
+        <span class="font-medium" id="otpNomor"></span>
+      </p>
+
+      <!-- OTP Input -->
+      <div class="flex justify-center gap-2 mb-6" id="otpInputs">
+        <input
+          type="text"
+          maxlength="1"
+          class="w-12 h-12 rounded-md text-center text-xl border-2 border-cyan-400 focus:outline-none"
+        />
+        <input
+          type="text"
+          maxlength="1"
+          class="w-12 h-12 rounded-md text-center text-xl border-2 border-cyan-400 focus:outline-none"
+        />
+        <input
+          type="text"
+          maxlength="1"
+          class="w-12 h-12 rounded-md text-center text-xl border-2 border-cyan-400 focus:outline-none"
+        />
+        <input
+          type="text"
+          maxlength="1"
+          class="w-12 h-12 rounded-md text-center text-xl border-2 border-cyan-400 focus:outline-none"
+        />
+        <input
+          type="text"
+          maxlength="1"
+          class="w-12 h-12 rounded-md text-center text-xl border-2 border-cyan-400 focus:outline-none"
+        />
+        <input
+          type="text"
+          maxlength="1"
+          class="w-12 h-12 rounded-md text-center text-xl border-2 border-cyan-400 focus:outline-none"
+        />
+      </div>
+      <div id="otpError" class="text-red-500 text-sm mb-2 hidden"></div>
+      <!-- Ganti Nomor -->
+      <p class="text-sm mb-4">
+        Ingin mengganti nomor Anda?
+        <a href="#" id="gantiNomor" class="text-cyan-500 font-medium">Klik di sini</a>
+      </p>
+
+      <!-- Verifikasi Button -->
+      <button
+        id="verifyBtn"
+        type="button"
+        class="bg-cyan-500 hover:bg-cyan-600 text-white py-2 px-6 rounded-full font-semibold mb-2 w-full"
+      >
+        Verifikasi nomor
+      </button>
+    </div>
+  </body>
+</html>
+ 

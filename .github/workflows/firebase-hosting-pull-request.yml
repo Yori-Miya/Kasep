@@ -1,0 +1,52 @@
+# Firebase Hosting Pull Request Preview
+# Deploys preview builds for pull requests to review changes before merging
+
+name: Deploy to Firebase Hosting on PR
+
+on: 
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  checks: write
+  contents: read
+  pull-requests: write
+
+jobs:
+  build_and_preview:
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Checkout repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Setup Node.js with caching
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      # Lint code
+      - name: Lint code
+        run: npm run lint
+        continue-on-error: true
+
+      # Build static files
+      - name: Build project
+        run: npm run build
+
+      # Deploy preview to Firebase
+      - name: Deploy preview
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KASEP_PROJECT }}
+          projectId: kasep-project

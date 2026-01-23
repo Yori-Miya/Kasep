@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manajemen Barang - KASEP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("mobile-menu");
+        menu.classList.toggle("hidden");
+      }
+    </script>
+  </head>
+  <body
+    class="font-sans background bg-cover bg-center bg-no-repeat items-center justify-center"
+    style="background-image: url('./assets/image/background.png')"
+  >
+    <!-- Responsive Navbar -->
+    <nav
+      class="md:hidden bg-white shadow-md px-4 py-3 flex items-center justify-between"
+    >
+      <div class="flex items-center gap-4">
+        <button onclick="toggleMenu()" class="text-2xl">☰</button>
+        <img
+          src="./assets/image/logo.png"
+          alt="Logo"
+          class="w-20 object-contain"
+        />
+      </div>
+      <div class="flex items-center gap-2">
+        <h1 class="fullname text-sm font-semibold">qwertyuio</h1>
+        <img
+          src="./assets/image/profile.png"
+          alt="Profile"
+          class="displayLogo w-8 h-8 bg-black rounded-full"
+        />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="notif size-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
+          />
+        </svg>
+      </div>
+    </nav>
+    <div
+      id="mobile-menu"
+      class="md:hidden hidden bg-white w-56 rounded-b-md shadow-md px-4 py-3"
+    >
+      <a href="./manajemen.html" class="block px-4 py-2 font-semibold"
+        >Manajemen Barang</a
+      >
+      <a
+        href="./transaksi.html"
+        class="block px-4 py-2 font-semibold text-cyan-500"
+        >Transaksi</a
+      >
+      <a href="./laporan.html" class="block px-4 py-2 font-semibold">Laporan</a>
+    </div>
+
+    <!-- Layout -->
+      <div class="flex min-h-screen">
+      <!-- Sidebar Desktop Only -->
+      <aside
+        class="hidden md:flex w-56 flex-col items-start pt-4 px-4 bg-white shadow-md"
+      >
+        <img src="./assets/image/logo.png" alt="Logo" class="w-24 mb-12" />
+        <a
+          href="./manajemen.html"
+          class="w-full text-left px-4 py-2 mb-4 rounded-full bg-white border font-semibold"
+          >Manajemen Barang</a
+        >
+        <a
+          href="./transaksi.html"
+          class="w-full text-left px-4 py-2 mb-4 rounded-full bg-cyan-500 text-white border font-semibold"
+          >Transaksi</a
+        >
+        <a
+          href="./laporan.html"
+          class="w-full text-left px-4 py-2 mb-4 rounded-full bg-white border font-semibold"
+          >Laporan</a
+        >
+      </aside>
+
+      <!-- Content Area -->
+      <main class="flex-1">
+        <!-- Header Desktop Only -->
+        <div
+          class="hidden md:flex items-center justify-between mb-4 bg-white p-4 relative"
+        >
+          <!-- Bagian Tengah -->
+          <div
+            class="absolute left-1/2 transform -translate-x-1/2 flex items-center gap-4"
+          >
+            <h1 class="fullname text-xl font-semibold text-gray-700">qwertyuio</h1>
+            <img
+              src="./assets/image/profile.png"
+              alt="Profile"
+              class="displayLogo w-8 h-8 bg-black rounded-full"
+            />
+          </div>
+
+          <!-- Spacer untuk jaga layout kiri -->
+          <div class="w-8 h-8"></div>
+
+          <!-- Icon Bell di kanan -->
+          <div class="flex items-center gap-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="notif size-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
+              />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Tambahkan tombol Export di atas struk -->
+<div class="flex justify-end mb-2">
+  <button id="btn-export" class="px-3 py-1 bg-cyan-500 text-white rounded shadow hover:bg-cyan-600 transition text-xs">
+    Export PDF
+  </button>
+</div>
+
+<div
+  id="struk"
+  class="w-[340px] bg-white p-4 shadow-md border text-sm font-sans mx-auto"
+>
+  <!-- Header -->
+  <div class="text-center">
+    <div
+      class="tokoLogo w-20 h-20 mx-auto bg-white-200 mb-2 flex items-center justify-center"
+    >
+    </div>
+    <p class="font-bold" id="toko-nama">Nama Toko</p>
+    <p class="font-semibold" id="toko-phone">+62</p>
+  </div>
+
+  <hr class="my-3 border-dotted" />
+
+  <!-- Info Transaksi -->
+  <div class="space-y-1">
+    <p>Kode Struk: <span class="float-right">#123456</span></p>
+    <p>Tanggal: <span class="float-right">30/06/2025</span></p>
+    <p>Waktu: <span class="float-right">21:40</span></p>
+    <p>Kasir: <span class="float-right">Admin</span></p>
+    <p>Nama Pelanggan: <span class="float-right">Budi</span></p>
+  </div>
+
+  <hr class="my-3 border-solid" />
+
+  <!-- Tabel Barang -->
+  <table class="w-full text-left text-xs">
+    <thead class="border-b border-black font-semibold">
+      <tr>
+        <th>Barang</th>
+        <th>Harga</th>
+        <th>Jumlah</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody class="text-gray-700">
+      <tr>
+        <td>Produk A</td>
+        <td>5.000</td>
+        <td>2</td>
+        <td>10.000</td>
+      </tr>
+      <tr>
+        <td>Produk B</td>
+        <td>3.000</td>
+        <td>1</td>
+        <td>3.000</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr class="my-3 border-dotted" />
+
+  <!-- Ringkasan -->
+  <div class="text-xs space-y-1">
+    <p class="flex justify-between">
+      <span>Subtotal:</span> <span>13.000</span>
+    </p>
+    <p class="flex justify-between">
+      <span>Diskon:</span> <span>0%</span>
+    </p>
+    <p class="flex justify-between">
+      <span>Total Diskon:</span> <span>0</span>
+    </p>
+  </div>
+
+  <hr class="my-3 border-dotted" />
+
+  <div class="text-xs space-y-1">
+    <p class="flex justify-between">
+      <span>Pajak (PPN):</span> <span>1.300</span>
+    </p>
+    <p class="flex justify-between font-semibold">
+      <span>Total:</span> <span>14.300</span>
+    </p>
+    <p class="flex justify-between">
+      <span>Pembayaran:</span> <span>15.000</span>
+    </p>
+    <p class="flex justify-between">
+      <span>Kembalian:</span> <span>700</span>
+    </p>
+  </div>
+
+  <hr class="my-3 border-dotted" />
+
+  <!-- Footer -->
+  <div class="text-center text-sm mt-4 font-semibold">
+    <p>Terima kasih atas kunjungannya</p>
+  </div>
+
+  <!-- QR -->
+  <!-- <div class="flex justify-center mt-4">
+    <div
+      class="w-20 h-20 bg-black text-white flex items-center justify-center"
+    >
+      QR
+    </div>
+  </div> -->
+
+  <p class="text-[10px] text-right mt-4 text-cyan-600">
+    by <span class="font-bold">KASEP</span>
+  </p>
+</div>
+      </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="config/firebase-config.js"></script>
+    <script src="profileDisplay/profileHandler.js"></script>
+    <script src="services/receipt.js"></script></script>
+  </body>
+</html>

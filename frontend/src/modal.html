@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manajemen Barang - KASEP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("mobile-menu");
+        menu.classList.toggle("hidden");
+      }
+    </script>
+  </head>
+  <body
+    class="font-sans background bg-cover bg-center bg-no-repeat items-center justify-center"
+    style="background-image: url('./assets/image/background.png')"
+  >
+    <!-- Responsive Navbar -->
+    <nav
+      class="md:hidden bg-white shadow-md px-4 py-3 flex items-center justify-between"
+    >
+      <div class="flex items-center gap-4">
+        <button onclick="toggleMenu()" class="text-2xl">☰</button>
+        <img
+          src="./assets/image/logo.png"
+          alt="Logo"
+          class="w-20 object-contain"
+        />
+      </div>
+      <div class="flex items-center gap-2">
+        <h1 class="fullname text-sm font-semibold">qwertyuio</h1>
+        <img
+          src="./assets/image/profile.png"
+          alt="Profile"
+          class="displayLogo w-8 h-8 bg-black rounded-full"
+        />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="notif size-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
+          />
+        </svg>
+      </div>
+    </nav>
+    <div
+      id="mobile-menu"
+      class="md:hidden hidden bg-white w-56 rounded-b-md shadow-md px-4 py-3"
+    >
+      <a href="./manajemen.html" class="block px-4 py-2 font-semibold"
+        >Manajemen Barang</a
+      >
+      <a href="./transaksi.html" class="block px-4 py-2 font-semibold"
+        >Transaksi</a
+      >
+      <a href="./laporan.html" class="block px-4 py-2 font-semibold">Laporan</a>
+    </div>
+
+    <div class="flex min-h-screen">
+      <!-- Sidebar Desktop Only -->
+      <aside
+        class="hidden md:flex w-56 flex-col items-start pt-4 px-4 bg-white shadow-md"
+      >
+        <img src="./assets/image/logo.png" alt="Logo" class="w-24 mb-12" />
+        <a
+          href="./manajemen.html"
+          class="w-full text-left px-4 py-2 mb-4 rounded-full bg-white border font-semibold"
+          >Manajemen Barang</a
+        >
+        <a
+          href="./transaksi.html"
+          class="w-full text-left px-4 py-2 mb-4 rounded-full bg-white border font-semibold"
+          >Transaksi</a
+        >
+        <a
+          href="./laporan.html"
+          class="w-full text-left px-4 py-2 mb-4 rounded-full bg-white border font-semibold"
+          >Laporan</a
+        >
+      </aside>
+
+      <main class="flex-1">
+        <div class="p-6">
+          <!-- Info Section -->
+          <div class="bg-white p-4 rounded-md shadow text-center text-sm mb-4">
+            <p>
+              Silakan masukkan jumlah modal agar sistem dapat mencatat dan
+              menganalisis perkembangan usaha Anda secara optimal.
+            </p>
+          </div>
+
+          <!-- Modal Box -->
+          <div class="bg-cyan-500 text-white rounded-md p-6 text-center mb-6">
+            <h2 class="text-lg font-bold mb-2">MODAL</h2>
+            <p id="displayModal" class="text-2xl font-bold tracking-wide">Rp.1xxxxxxxx</p>
+            <p class="text-sm mt-1">Modal usaha anda</p>
+          </div>
+
+          <!-- Input Modal -->
+          <div class="bg-white rounded-md p-6 shadow-md">
+            <label for="modalInput" class="block text-sm font-semibold mb-1"
+              >Masukkan Modal Anda</label
+            >
+            <p class="text-xs text-gray-500 mb-2">Contoh: 1.500.000</p>
+            <input
+              id="modalInput"
+              type="text"
+              placeholder="Masukkan nominal"
+              class="w-full border rounded-md px-3 py-2 mb-4"
+              maxlength="15"
+            />
+            <button
+              class="w-full bg-cyan-500 text-white py-2 rounded-md font-semibold"
+            >
+              Simpan
+            </button>
+
+            <!-- History Modal -->
+            <div id="modalHistory" class="mt-8">
+              <h3 class="font-bold mb-2 text-cyan-700">Riwayat Modal</h3>
+              <div id="modalHistoryList" class="space-y-2"></div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="config/firebase-config.js"></script>
+    <script src="profileDisplay/profileHandler.js"></script>
+    <script src="account/wallet.js"></script>
+  </body>
+</html>

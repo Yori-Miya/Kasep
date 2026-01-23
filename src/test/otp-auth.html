@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test OTP Sederhana</title>
+    <script src="https://www.gstatic.com/firebasejs/9.12.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.12.1/firebase-auth-compat.js"></script>
+    <script src="../config/firebase-config.js"></script>
+    <style>
+        #otp-section, #success-section { display: none; }
+    </style>
+</head>
+<body>
+    <div id="phone-section">
+        <h2>Registrasi Nomor Telepon</h2>
+        <input type="number" id="number" placeholder="08xxxxxxxxxx" required />
+        <button onclick="phoneAuth()">Kirim OTP</button>
+        <div id="recaptcha-container" class="my-2"></div>
+    </div>
+
+    <div id="otp-section">
+        <h2>Masukkan Kode OTP</h2>
+        <input type="number" id="verificationcode" placeholder="Kode OTP" required />
+        <button onclick="codeverify()">Verifikasi OTP</button>
+        <div id="otp-error" style="color:red;"></div>
+    </div>
+
+    <div id="success-section">
+        <h2>Registrasi Berhasil!</h2>
+        <p>Nomor telepon Anda telah diverifikasi.</p>
+    </div>
+
+    <script>
+        // Render reCAPTCHA hanya sekali
+        window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+            'size': 'normal'
+        });
+        recaptchaVerifier.render();
+
+        // Kirim OTP
+        function phoneAuth() {
+            let number = document.getElementById('number').value.trim();
+            if (number.startsWith("0")) {
+                number = "+62" + number.slice(1);
+            }
+            firebase.auth().signInWithPhoneNumber(number, window.recaptchaVerifier)
+                .then(function (confirmationResult) {
+                    window.confirmationResult = confirmationResult;
+                    document.getElementById('phone-section').style.display = 'none';
+                    document.getElementById('otp-section').style.display = 'block';
+                }).catch(function (error) {
+                    alert(error.message);
+                    if (window.recaptchaVerifier) {
+                        window.recaptchaVerifier.render().then(function(widgetId) {
+                            grecaptcha.reset(widgetId);
+                        });
+                    }
+                });
+        }
+
+        // Verifikasi OTP
+        function codeverify() {
+            var code = document.getElementById('verificationcode').value;
+            document.getElementById('otp-error').textContent = "";
+            window.confirmationResult.confirm(code).then(function () {
+                document.getElementById('otp-section').style.display = 'none';
+                document.getElementById('success-section').style.display = 'block';
+            }).catch(function () {
+                document.getElementById('otp-error').textContent = "Kode OTP salah atau sudah kadaluarsa.";
+            });
+        }
+    </script>
+</body>
+</html>
