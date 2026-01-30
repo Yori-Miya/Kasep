@@ -1,16 +1,30 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
-const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+// ESLint configuration for vanilla HTML & JavaScript project
+export default [
+  {
+    ignores: ["node_modules", "frontend/src/assets/css/output.css", ".firebase", "dist", "build"],
+  },
+  {
+    files: ["frontend/src/**/*.js"],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: "module",
+      globals: {
+        // Browser globals
+        document: "readonly",
+        window: "readonly",
+        console: "readonly",
+        fetch: "readonly",
+        localStorage: "readonly",
+        sessionStorage: "readonly",
+        // Firebase globals
+        firebase: "readonly",
+        db: "readonly",
+        auth: "readonly",
+      },
+    },
+    rules: {
+      "no-unused-vars": ["warn"],
+      "no-console": "off",
+    },
+  },
 ];
-
-export default eslintConfig;

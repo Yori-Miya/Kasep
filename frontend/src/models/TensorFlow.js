@@ -102,11 +102,12 @@ async function predictMinimumStock(userId) {
   return stokMinimum; // { namaBarang: stokMinimum, ... }
 }
 
+// Kontribusi pada window global untuk diakses dari HTML
+window.predictMinimumStock = predictMinimumStock;
+
 // Contoh penggunaan:
 // const userId = sessionStorage.getItem('userId');
 // predictMinimumStock(userId).then(result => {
 //   console.log('Stok minimum rekomendasi:', result);
 //   // Tampilkan notifikasi jika stok barang < stokMinimum
 // });
-
-export { predictMinimumStock };

@@ -1,6 +1,14 @@
 {
-  "dependencies": {
-    "@tailwindcss/cli": "^4.1.11",
+  "name": "kasep-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "KASEP Frontend - Vanilla HTML, CSS, and JavaScript with Tailwind CSS",
+  "scripts": {
+    "build": "node build-css.js",
+    "dev": "npm run build",
+    "watch": "node build-css.js --watch"
+  },
+  "devDependencies": {
     "tailwindcss": "^4.1.11"
   }
 }

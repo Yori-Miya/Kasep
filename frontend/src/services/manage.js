@@ -1,4 +1,5 @@
-import { predictMinimumStock } from '../models/TensorFlow.js';
+// Import predictMinimumStock dari TensorFlow module
+// Ini akan dipanggil setelah TensorFlow.js di-load di HTML
 
 const user = firebase.auth().currentUser;
 // const userId = user ? user.uid : null;
@@ -28,18 +29,21 @@ firebase.auth().onAuthStateChanged(user => {
   // }
 
   // Panggil prediksi stok minimum dan simpan ke Firestore barang
-  predictMinimumStock(userId).then(async (stokMinimum) => {
-    // Simpan hasil prediksi ke setiap barang
-    for (const namaBarang in stokMinimum) {
-      // Cari dokumen barang berdasarkan nama (atau gunakan id jika tersedia)
-      const barangQuery = await db.collection('user').doc(userId).collection('barang').where('nama', '==', namaBarang).get();
-      barangQuery.forEach(async doc => {
-        await db.collection('user').doc(userId).collection('barang').doc(doc.id).set({
-          prediksiStok: stokMinimum[namaBarang]
-        }, { merge: true });
-      });
-    }
-  });
+  // predictMinimumStock adalah function global dari TensorFlow.js
+  if (window.predictMinimumStock) {
+    window.predictMinimumStock(userId).then(async (stokMinimum) => {
+      // Simpan hasil prediksi ke setiap barang
+      for (const namaBarang in stokMinimum) {
+        // Cari dokumen barang berdasarkan nama (atau gunakan id jika tersedia)
+        const barangQuery = await db.collection('user').doc(userId).collection('barang').where('nama', '==', namaBarang).get();
+        barangQuery.forEach(async doc => {
+          await db.collection('user').doc(userId).collection('barang').doc(doc.id).set({
+            prediksiStok: stokMinimum[namaBarang]
+          }, { merge: true });
+        });
+      }
+    });
+  }
 
   function renderBarangRealtime(filter = "") {
     listDiv.innerHTML = '';
